@@ -1,9 +1,20 @@
 filetype plugin indent on
 execute pathogen#infect()
+
+" Set to the dark solarized colour scheme
 set background=dark
-" colorscheme solarized
+let g:solarized_termtrans=1
+let g:solarized_termcolors=256
+let g:solarized_contrast="high"
+let g:solarized_visibility="high"
+colorscheme solarized
+
+" set the ruler to display cursor position on
 set ruler
+
+" set syntax highlighting on
 syntax on
+
 nmap <F8> :TagbarToggle<CR>
 
 "AIRLINE/BUFFER MANAGEMENT
