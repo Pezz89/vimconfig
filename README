@@ -1,0 +1,21 @@
+Installation:
+	
+	git clone https://github.com/Pezz89/vimconfig.git ~/.vim
+
+Create symlinks:
+	
+	ln -s ~/.vim/vimrc ~/.vimrc
+
+Fetch submodules:
+	cd ~/.vim
+	git submodule init
+	git submodule update
+
+To upgrade a single plugin run:
+
+	cd ~/.vim/bundle/fugitive
+	git pull origin master
+
+To upgrade all modules run:
+
+	git submodule foreach git pull origin master

@@ -12,9 +12,34 @@ colorscheme solarized
 " set the ruler to display cursor position on
 set ruler
 
+" show line numbers
+set number
+
 " set syntax highlighting on
 syntax on
 
+" set tabs to have 4 spaces
+set ts=4
+
+" indent when moving to the next line while writing code
+set autoindent
+
+" expand tabs into spaces
+set expandtab
+
+" when using the >> or << commands, shift lines by 4 spaces
+set shiftwidth=4
+
+" show a visual line under the cursor's current line 
+set cursorline
+
+" enable all Python syntax highlighting features
+let python_highlight_all = 1
+
+" show the matching part of the pair for [] {} and ()
+set showmatch
+
+" Activate/deactivate the Tagbar 
 nmap <F8> :TagbarToggle<CR>
 
 "AIRLINE/BUFFER MANAGEMENT
