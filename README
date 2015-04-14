@@ -22,3 +22,8 @@ To upgrade a single plugin run:
 
 To fix colour (/lack of) problems add the following lines to ~/.bashrc:
     export TERM="xterm-256color"
+
+Install a new submodule plugin:
+    cd ~/.vim
+    git submodule add git://github.com/tpope/vim-fugitive.git bundle/fugitive
+    git submodule init && git submodule update
