@@ -1,7 +1,12 @@
 set shell=bash\ -i
 
+" Allow the use of the mouse in vim
+set mouse=a
+
 filetype plugin indent on
 execute pathogen#infect()
+" enable help docs
+Helptags
 
 " Set to the dark solarized colour scheme
 set background=dark
@@ -72,3 +77,15 @@ nmap <leader>bl :ls<CR>
 "closetag for HTML settings...
 autocmd FileType html,htmldjango,jinjahtml,eruby,mako let b:closetag_html_style=1
 autocmd FileType html,xhtml,xml,htmldjango,jinjahtml,eruby,mako source ~/.vim/bundle/closetag/plugin/closetag.vim
+
+" Pymode setting
+let g:pymode_options = 1
+let g:pymode_folding = 0
+let g:pymode_options_max_line_length = 79
+let g:pymode_options_colorcolumn = 0
+let g:pymode_indent = 1
+let g:pymode_lint_on_write = 0
+let g:pymode_lint = 1
+
+" map linting shortcut
+nmap <leader>li :PymodeLint<CR>
