@@ -16,6 +16,9 @@ let g:solarized_contrast="high"
 let g:solarized_visibility="high"
 colorscheme solarized
 
+"Disable .swp files
+set noswapfile
+
 " set the ruler to display cursor position on
 set ruler
 
@@ -29,7 +32,7 @@ syntax on
 set ts=4
 
 " indent when moving to the next line while writing code
- set autoindent
+set autoindent
 
 " expand tabs into spaces
 set expandtab
@@ -48,6 +51,8 @@ set showmatch
 
 " Activate/deactivate the Tagbar 
 nmap <F8> :TagbarToggle<CR>
+
+nmap <F7> :NERDTreeToggle<CR>
 
 "AIRLINE/BUFFER MANAGEMENT
 let g:airline#extensions#tabline#enabled = 1
