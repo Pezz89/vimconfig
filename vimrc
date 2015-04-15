@@ -24,7 +24,7 @@ syntax on
 set ts=4
 
 " indent when moving to the next line while writing code
-" set autoindent
+ set autoindent
 
 " expand tabs into spaces
 set expandtab
@@ -68,3 +68,7 @@ nmap <leader>bq :bp <BAR> bd #<CR>
 
 " Show all open buffers and their status
 nmap <leader>bl :ls<CR>
+
+"closetag for HTML settings...
+autocmd FileType html,htmldjango,jinjahtml,eruby,mako let b:closetag_html_style=1
+autocmd FileType html,xhtml,xml,htmldjango,jinjahtml,eruby,mako source ~/.vim/bundle/closetag/plugin/closetag.vim
