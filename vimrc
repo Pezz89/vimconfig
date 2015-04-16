@@ -52,7 +52,10 @@ set showmatch
 " Activate/deactivate the Tagbar 
 nmap <F8> :TagbarToggle<CR>
 
+" NerdTree Settings
 nmap <F7> :NERDTreeToggle<CR>
+"Fix nerdtree arrow problems
+let g:NERDTreeDirArrows=0
 
 "AIRLINE/BUFFER MANAGEMENT
 let g:airline#extensions#tabline#enabled = 1
