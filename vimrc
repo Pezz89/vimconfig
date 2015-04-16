@@ -95,4 +95,4 @@ let g:pymode_lint = 1
 let g:pymode_rope = 0
 
 " map linting shortcut
-nmap <leader>li :PymodeLint<CR>
+nmap <leader>pl :PymodeLint<CR>
