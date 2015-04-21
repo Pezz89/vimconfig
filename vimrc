@@ -122,3 +122,4 @@ function! ToggleErrors()
 endfunction
 
 nmap <F6> :call ToggleErrors()<CR>
+let g:syntastic_auto_loc_list = 0
