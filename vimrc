@@ -85,7 +85,7 @@ nmap <leader>bl :ls<CR>
 "closetag for HTML settings...
 autocmd FileType html,htmldjango,jinjahtml,eruby,mako let b:closetag_html_style=1
 autocmd FileType html,xhtml,xml,htmldjango,jinjahtml,eruby,mako source ~/.vim/bundle/closetag/plugin/closetag.vim
-
+autocmd FileType html,xhtml,xml,htmldjango,jinjahtml,eruby,mako set smarttab
 " Pymode setting
 let g:pymode_options = 1
 let g:pymode_folding = 0
@@ -99,3 +99,4 @@ let g:pymode_rope = 0
 
 " map linting shortcut
 nmap <leader>pl :PymodeLint<CR>
+
