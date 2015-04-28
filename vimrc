@@ -128,3 +128,9 @@ let g:syntastic_auto_loc_list = 0
 " Run all checkers and then create list of errors rather than showing error
 " lists individually
 let g:syntastic_aggregate_errors = 1
+
+" Disable arrow keys
+map <Up>    <nop>
+map <Down>  <nop>
+map <Left>  <nop>
+map <Right> <nop>
