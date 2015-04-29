@@ -136,4 +136,3 @@ map <Left>  <nop>
 map <Right> <nop>
 
 set backspace=indent,eol,start
-set helpfile=$VIMRUNTIME/doc/help.txt

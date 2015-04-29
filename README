@@ -37,5 +37,5 @@ Installing a local copy of Vim:
     alias vim='~/.vim/vim/src/vim'
 
     The following lines can also be added to the .cshrc for the same effect when accessing vim via ssh:
-    setenv VIM '~/.vim/vim/runtime/'
+    setenv VIM $HOME/.vim/vim/runtime/
     
