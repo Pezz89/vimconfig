@@ -134,3 +134,5 @@ map <Up>    <nop>
 map <Down>  <nop>
 map <Left>  <nop>
 map <Right> <nop>
+
+set backspace=indent,eol,start

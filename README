@@ -12,7 +12,7 @@ Fetch submodules:
 
 To upgrade all modules run:
 
-	git submodule foreach git pull origin master --recursive(?)
+    git submodule foreach git pull origin master --recursive(?)
 
 To upgrade a single plugin run:
 
@@ -26,3 +26,16 @@ Install a new submodule plugin:
     cd ~/.vim
     git submodule add git://github.com/tpope/vim-fugitive.git bundle/fugitive
     git submodule init && git submodule update
+
+Installing a local copy of Vim:
+    cd ~/.vim/vim/
+    make distclean
+    ./configure --with-features=huge --enable-pythoninterp --with-python-config-dir=/path/to/python2.7/config
+    make
+
+    The following lines must then be added to the .bashrc or .bash_profile:
+    alias vim='~/.vim/vim/src/vim'
+
+    The following lines can also be added to the .cshrc for the same effect when accessing vim via ssh:
+    setenv VIM '~/.vim/vim/runtime/'
+    
