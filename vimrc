@@ -10,8 +10,6 @@ Helptags
 set noswapfile
 " set the ruler to display cursor position on
 set ruler
-" show line numbers
-set number
 " set syntax highlighting on
 syntax on
 " set tabs to have 4 spaces
@@ -28,6 +26,8 @@ set cursorline
 let python_highlight_all = 1
 " show the matching part of the pair for [] {} and ()
 set showmatch
+
+set nu
 
 
 " Solarized settings
@@ -66,7 +66,7 @@ nmap <leader>l :bnext<CR>
 nmap <leader>h :bprevious<CR>
 " Close the current buffer and move to the previous one
 " This replicates the idea of closing a tab
-nmap <leader>bq :bp <BAR> bd #<CR>
+nmap <leader>bq :bp <BAR> bd! #<CR>
 " Show all open buffers and their status
 nmap <leader>bl :ls<CR>
 
@@ -136,3 +136,29 @@ map <Left>  <nop>
 map <Right> <nop>
 
 set backspace=indent,eol,start
+
+autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
+autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+
+set conceallevel=2
+set concealcursor=vin
+
+" Toggle between line numbers and relative line numbers
+autocmd InsertEnter * silent! :set norelativenumber
+autocmd InsertLeave,BufNewFile,VimEnter * silent! :set relativenumber
+
+" Complete options (disable preview scratch window, longest removed to aways
+" show menu)
+set completeopt=preview,preview
+
+" Limit popup menu height
+set pumheight=20"
+" SuperTab completion fall-back 
+let g:SuperTabDefaultCompletionType='<c-x><c-u><c-p>'
+let g:ycm_cache_omnifunc = 0
+
+" Ignore case when using search
+set ignorecase
+
+" Show search result before moving to it
+set incsearch
