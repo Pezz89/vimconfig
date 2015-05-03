@@ -46,3 +46,6 @@
 [submodule "bundle/html5"]
 	path = bundle/html5
 	url = https://github.com/othree/html5.vim.git
+[submodule "bundle/sparkup"]
+	path = bundle/sparkup
+	url = git@github.com:rstacruz/sparkup.git

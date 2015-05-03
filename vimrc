@@ -143,9 +143,8 @@ autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 set conceallevel=2
 set concealcursor=vin
 
-" Toggle between line numbers and relative line numbers
-autocmd InsertEnter * silent! :set norelativenumber
-autocmd InsertLeave,BufNewFile,VimEnter * silent! :set relativenumber
+" Set numbers to display relative to current cursor position in the file
+set relativenumber
 
 " Complete options (disable preview scratch window, longest removed to aways
 " show menu)
