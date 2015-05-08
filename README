@@ -38,4 +38,14 @@ Installing a local copy of Vim:
 
     The following lines can also be added to the .cshrc for the same effect when accessing vim via ssh:
     setenv VIM $HOME/.vim/vim/runtime/
+
+Installing Homebrew/Linuxbrew and cmake:
+    Install homebrew:
+    (May need to run "bash" first if running over ssh)
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+    Set the brew path:
+    set path = (/net/inavouable/u.anasynth10/perry/.linuxbrew/bin $path)
     
+    Install cmake via brew:
+    brew install cmake

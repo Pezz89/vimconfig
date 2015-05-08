@@ -4,6 +4,7 @@ set shell=bash\ -i
 set mouse=a
 filetype plugin indent on
 execute pathogen#infect()
+execute pathogen#helptags()
 " enable help docs
 Helptags
 "Disable .swp files
@@ -20,6 +21,8 @@ set autoindent
 set expandtab
 " when using the >> or << commands, shift lines by 4 spaces
 set shiftwidth=4
+" remove 4 spaces as if it were a tab
+set softtabstop=4
 " show a visual line under the cursor's current line 
 set cursorline
 " enable all Python syntax highlighting features
@@ -161,3 +164,8 @@ set ignorecase
 
 " Show search result before moving to it
 set incsearch
+
+" Source local vim script for the current machine
+if filereadable(expand("./vimrc.local"))
+    source ./vimrc.local
+endif
