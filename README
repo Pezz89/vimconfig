@@ -49,3 +49,8 @@ Installing Homebrew/Linuxbrew and cmake:
     
     Install cmake via brew:
     brew install cmake
+
+Installing JavaScript Syntastic support
+    Install node.js:
+    brew install node
+    npm -g install jshint

@@ -169,3 +169,5 @@ set incsearch
 if filereadable(expand("./vimrc.local"))
     source ./vimrc.local
 endif
+
+let g:syntastic_javascript_checkers = ['jshint']
