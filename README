@@ -54,3 +54,8 @@ Installing JavaScript Syntastic support
     Install node.js:
     brew install node
     npm -g install jshint
+
+Setting enviroment variables in .cshrc for VIM:
+    setenv VIM "~/.vim/vim/src/vim"
+    setenv VIMRUNTIME "~/.vim/vim/runtime"
+    setenv EDITOR 'vim'
