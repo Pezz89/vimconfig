@@ -48,7 +48,7 @@ set showmatch
 
 " 
 set nu
-
+            
 " Set numbers to display relative to current cursor position in the file
 set relativenumber
 
@@ -68,7 +68,7 @@ let g:solarized_termcolors=256
 let g:solarized_contrast="high"
 let g:solarized_visibility="high"
 colorscheme solarized
-
+set t_Co=256                        " force vim to use 256 colors
 " ====================================
 " NerdTree Settings
 " ====================================
@@ -131,6 +131,12 @@ let g:pymode_rope = 0
 
 " Enable all extra syntax highlighting options
 let g:pymode_syntax_all = 1
+
+" ====================================
+" ProSession Settings
+" ====================================
+let g:prosession_tmux_title = 1
+let g:prosession_load_on_startup = 1
 
 " ====================================
 " Syntastic
@@ -228,6 +234,8 @@ nmap <leader>bl :ls<CR>
 " Toggle the NerdTree file browser menu
 nmap <F7> :NERDTreeToggle<CR>
 
+nmap <leader>o :Obsess<CR>
+
 " Copy too and from the system clipboard with standard yank and paste commands
 " but with leader
 vmap <Leader>y "+y
@@ -244,6 +252,20 @@ nmap <Leader><Leader> V
 " paragraph 
 vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
+
+" Use enter to jump to line number/end of file
+nnoremap <CR> G
+" Use backspace go to begining of file
+nnoremap <BS> gg
+
+" Stop strange window from popping up when accidentally press q:
+map q: :q
+
+" Navigate vim windows with hjkl
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
 
 " ====================================
 
