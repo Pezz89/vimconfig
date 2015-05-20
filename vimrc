@@ -9,6 +9,8 @@ execute pathogen#helptags()
 " ====================================
 " enable help docs
 Helptags
+" Set the default shell
+set shell=zsh\ -l
 
 " Allow the use of the mouse in vim
 set mouse=a
