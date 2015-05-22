@@ -1,9 +1,17 @@
 " Vim settings
-set shell=bash\ -i
-filetype plugin indent on
-execute pathogen#infect()
-execute pathogen#helptags()
+set shell=zsh\ -l
 
+" Of course
+set nocompatible
+
+" Required Vundle setup
+filetype off
+set runtimepath+=~/.vim/bundle/vundle
+call vundle#rc()
+
+Bundle 'gmarik/vundle'
+
+filetype plugin indent on
 " ====================================
 " General vim settings
 " ====================================
