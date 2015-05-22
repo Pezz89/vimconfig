@@ -1,22 +1,41 @@
 " Vim settings
 set shell=zsh\ -l
 
-" Of course
-set nocompatible
+set nocompatible              " be iMproved, required
+filetype off                  " required
 
-" Required Vundle setup
-filetype off
-set runtimepath+=~/.vim/bundle/vundle
-call vundle#rc()
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
 
-Bundle 'gmarik/vundle'
-
-filetype plugin indent on
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'bling/vim-airline'
+Plugin 'docunext/closetag.vim'
+Plugin 'rizzatti/dash.vim'
+Plugin 'terryma/vim-expand-region'
+Plugin 'tpope/vim-fugitive'
+Plugin 'othree/html5.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'klen/python-mode'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'rstacruz/sparkup'
+Plugin 'scrooloose/syntastic'
+Plugin 'majutsushi/tagbar'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'jelera/vim-javascript-syntax'
+Plugin 'tpope/vim-obsession'
+Plugin 'nvie/vim-togglemouse'
+Plugin 'benmills/vimux'
+Plugin 'julienr/vimux-pyutils'
+call vundle#end()            " required
+filetype plugin indent on    " required
 " ====================================
 " General vim settings
 " ====================================
-" enable help docs
-Helptags
 
 " Allow the use of the mouse in vim
 set mouse=a
@@ -252,6 +271,9 @@ nmap <Leader>p "+p
 nmap <Leader>P "+P
 vmap <Leader>p "+p
 vmap <Leader>P "+P
+
+" Set clipboard to system clipboard
+set clipboard=unnamed
 
 " Enter visual line by hitting leader twice
 nmap <Leader><Leader> V
