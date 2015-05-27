@@ -37,6 +37,8 @@ filetype plugin indent on    " required
 " ====================================
 " General vim settings
 " ====================================
+" Set the default shell
+set shell=zsh\ -l
 
 " Allow the use of the mouse in vim
 set mouse=a
