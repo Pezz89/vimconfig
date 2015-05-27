@@ -2,6 +2,11 @@ Installation:
 	
 	git clone https://github.com/Pezz89/vimconfig.git ~/.vim
 
+Local vimrc (.lvimrc)
+    once plugins have been installed, it is possible to set up a vimrc locally for both machine and individual projects
+    create a file called .lvimrc in the home directory and it will be sourced any time a file is accessed in a sub folder of that directory
+    In addition, .lvimrc files can be placed in project folder to allow for project specific vim configuartions
+
 Create symlinks:
 	
 	ln -s ~/.vim/vimrc ~/.vimrc
