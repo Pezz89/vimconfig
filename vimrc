@@ -31,6 +31,7 @@ Plugin 'tpope/vim-obsession'
 Plugin 'nvie/vim-togglemouse'
 Plugin 'benmills/vimux'
 Plugin 'julienr/vimux-pyutils'
+Plugin 'embear/vim-localvimrc'
 call vundle#end()            " required
 filetype plugin indent on    " required
 " ====================================
@@ -92,6 +93,10 @@ set ignorecase
 " Show search result before moving to it
 set incsearch
 
+" Quickly edit/reload the vimrc file
+nmap <silent> <leader>ev :e $MYVIMRC<CR>
+nmap <silent> <leader>sv :so $MYVIMRC<CR>
+
 " ====================================
 " Solarized settings
 " ====================================
@@ -103,11 +108,21 @@ let g:solarized_contrast="high"
 let g:solarized_visibility="high"
 colorscheme solarized
 set t_Co=256                        " force vim to use 256 colors
+
 " ====================================
 " NerdTree Settings
 " ====================================
 "Fix nerdtree arrow problems
 let g:NERDTreeDirArrows=0
+
+" ====================================
+" LocalVimrc Settings
+" ====================================
+" Set events to check for local vimrcs on
+let g:localvimrc_event = [ "BufWinEnter", "VimEnter" ]
+" Save preferences for which lvimrc files to load so vim doesn't ask every
+" time
+let g:localvimrc_persistent = 2
 
 " ====================================
 " Airline settings 
@@ -166,6 +181,9 @@ let g:pymode_rope = 0
 " Enable all extra syntax highlighting options
 let g:pymode_syntax_all = 1
 
+let g:pymode_run = 0
+let g:pymode_run_bind = ''
+
 " ====================================
 " ProSession Settings
 " ====================================
@@ -220,6 +238,24 @@ set completeopt=preview,preview
 
 " Limit popup menu height
 set pumheight=20"
+
+" ====================================
+" VIMUX Commands
+" ====================================
+" Prompt for a command to run
+map <Leader>vp :VimuxPromptCommand<CR>
+
+" Run last command executed by RunVimTmuxCommand
+map <Leader>vl :VimuxRunLastCommand<CR>
+
+" Inspect runner pane
+map <Leader>vi :VimuxInspectRunner<CR>
+
+" Close all other tmux panes in current window
+map <Leader>vq :VimuxCloseRunner<CR>
+
+" Interrupt any command running in the runner pane
+map <Leader>vs :VimuxInterruptRunner<CR>
 
 " ====================================
 " Custom key bindings
