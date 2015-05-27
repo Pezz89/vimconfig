@@ -37,13 +37,8 @@ filetype plugin indent on    " required
 " ====================================
 " General vim settings
 " ====================================
-<<<<<<< HEAD
-" enable help docs
-Helptags
 " Set the default shell
 set shell=zsh\ -l
-=======
->>>>>>> a05d7a95d410a9bad6fecca6f181b01fedb88f42
 
 " Allow the use of the mouse in vim
 set mouse=a
