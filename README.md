@@ -8,29 +8,10 @@ Local vimrc (.lvimrc)
     In addition, .lvimrc files can be placed in project folder to allow for project specific vim configuartions
 
 Create symlinks:
-	
 	ln -s ~/.vim/vimrc ~/.vimrc
-
-Fetch submodules:
-	cd ~/.vim
-    git submodule update --init --recursive
-
-To upgrade all modules run:
-
-    git submodule foreach git pull origin master --recursive(?)
-
-To upgrade a single plugin run:
-
-	cd ~/.vim/bundle/fugitive
-	git pull origin master
 
 To fix colour (/lack of) problems add the following lines to ~/.bashrc:
     export TERM="xterm-256color"
-
-Install a new submodule plugin:
-    cd ~/.vim
-    git submodule add git://github.com/tpope/vim-fugitive.git bundle/fugitive
-    git submodule init && git submodule update
 
 Installing a local copy of Vim:
     cd ~/.vim/vim/
@@ -64,3 +45,11 @@ Setting enviroment variables in .cshrc for VIM:
     setenv VIM "~/.vim/vim/src/vim"
     setenv VIMRUNTIME "~/.vim/vim/runtime"
     setenv EDITOR 'vim'
+
+Installing YouCompleteMe (YCM):
+    # Set pyenv python to system version to avoid a broken compilation
+    pyenv global system
+    # A workaround to the lack of a "python2" executable with pyenv
+    cd /usr/bin && sudo ln -s python python2
+    # Run the install script from the YCM directory
+    ./install.sh --clang-completer --system-libclang
