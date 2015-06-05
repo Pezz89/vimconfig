@@ -32,13 +32,19 @@ Plugin 'nvie/vim-togglemouse'
 Plugin 'benmills/vimux'
 Plugin 'julienr/vimux-pyutils'
 Plugin 'embear/vim-localvimrc'
+Plugin 'tpope/vim-surround'
 call vundle#end()            " required
-filetype plugin indent on    " required
+filetype on
+filetype plugin on
+filetype indent on
 " ====================================
 " General vim settings
 " ====================================
 " Set the default shell
 set shell=zsh\ -l
+
+" Set spell checker language
+set spelllang=en_gb
 
 " Allow the use of the mouse in vim
 set mouse=a
@@ -88,10 +94,6 @@ set ignorecase
 " Show search result before moving to it
 set incsearch
 
-" Quickly edit/reload the vimrc file
-nmap <silent> <leader>ev :e $MYVIMRC<CR>
-nmap <silent> <leader>sv :so $MYVIMRC<CR>
-
 " ====================================
 " Solarized settings
 " ====================================
@@ -139,7 +141,7 @@ set hidden
 " ====================================
 
 autocmd FileType html,htmldjango,jinjahtml,eruby,mako let b:closetag_html_style=1
-autocmd FileType html,xhtml,xml,htmldjango,jinjahtml,eruby,mako source ~/.vim/bundle/closetag/plugin/closetag.vim
+autocmd FileType html,xhtml,xml,htmldjango,jinjahtml,eruby,mako source ~/.vim/bundle/closetag.vim/plugin/closetag.vim
 autocmd FileType html,xhtml,xml,htmldjango,jinjahtml,eruby,mako set smarttab
 
 " ====================================
@@ -233,6 +235,11 @@ set completeopt=preview,preview
 
 " Limit popup menu height
 set pumheight=20"
+
+" ====================================
+" YouCompleteMe Settings
+" ====================================
+let g:ycm_path_to_python_interpreter = '/usr/bin/python'
 
 " ====================================
 " VIMUX Commands
@@ -332,6 +339,10 @@ nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
+
+" Quickly edit/reload the vimrc file
+nmap <silent> <leader>ev :e $MYVIMRC<CR>
+nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
 " ====================================
 
