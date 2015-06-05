@@ -323,8 +323,6 @@ vmap <C-v> <Plug>(expand_region_shrink)
 
 " Use enter to jump to line number/end of file
 nnoremap <CR> G
-" Use backspace go to begining of file
-nnoremap <BS> gg
 
 " Stop strange window from popping up when accidentally press q:
 map q: :q
