@@ -1,11 +1,11 @@
 " Vim settings
-set shell=zsh\ -l
+let g:python_host_prog='/usr/bin/python'
 
-set nocompatible              " be iMproved, required
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=/usr/local/Cellar/fzf/HEAD
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
@@ -327,11 +327,6 @@ nmap <Leader><Leader> V
 " paragraph 
 vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
-
-" Use enter to jump to line number/end of file
-nnoremap <CR> G
-" Use backspace go to begining of file
-nnoremap <BS> gg
 
 " Stop strange window from popping up when accidentally press q:
 map q: :q

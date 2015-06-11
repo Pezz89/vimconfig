@@ -53,3 +53,7 @@ Installing YouCompleteMe (YCM):
     cd /usr/bin && sudo ln -s python python2
     # Run the install script from the YCM directory
     ./install.sh --clang-completer --system-libclang
+
+Fixing tmux Ctrl-h command for navigation:
+    infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > $TERM.ti
+    tic $TERM.ti
