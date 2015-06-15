@@ -33,6 +33,8 @@ Plugin 'benmills/vimux'
 Plugin 'julienr/vimux-pyutils'
 Plugin 'embear/vim-localvimrc'
 Plugin 'tpope/vim-surround'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'Yggdroot/indentLine'
 call vundle#end()            " required
 filetype on
 filetype plugin on
@@ -94,8 +96,21 @@ set ignorecase
 " Show search result before moving to it
 set incsearch
 
+" Show invisible charachters
+set listchars=eol:¬
+highlight NonText guifg=#4a4a59
+highlight SpecialKey guifg=#4a4a59
+set nolist
+
 " ====================================
-" Solarized settings
+" Indent highlighting settings
+" ====================================
+let g:indentLine_char = '▸'
+let g:indentLine_color_term = 0
+let g:indentLine_enabled = 0
+
+" ====================================
+" solarized settings
 " ====================================
 " Set to the dark solarized colour scheme
 set background=dark
@@ -126,6 +141,7 @@ let g:localvimrc_persistent = 2
 " ====================================
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#tabline#buffer_nr_format = '%s: '
 "Remove seperators and makes airline look cleaner
 let g:airline_left_sep=''
 let g:airline_right_sep=''
@@ -135,6 +151,16 @@ set laststatus=2
 " This allows buffers to be hidden if you've modified a buffer.
 " This is almost a must if you wish to use buffers in this way.
 set hidden
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+nmap <leader>1 <Plug>AirlineSelectTab1
+nmap <leader>2 <Plug>AirlineSelectTab2
+nmap <leader>3 <Plug>AirlineSelectTab3
+nmap <leader>4 <Plug>AirlineSelectTab4
+nmap <leader>5 <Plug>AirlineSelectTab5
+nmap <leader>6 <Plug>AirlineSelectTab6
+nmap <leader>7 <Plug>AirlineSelectTab7
+nmap <leader>8 <Plug>AirlineSelectTab8
+nmap <leader>9 <Plug>AirlineSelectTab9
 
 " ====================================
 " Closetag for HTML settings...
@@ -258,6 +284,14 @@ map <Leader>vq :VimuxCloseRunner<CR>
 
 " Interrupt any command running in the runner pane
 map <Leader>vs :VimuxInterruptRunner<CR>
+
+" ====================================
+" Custom key bindings
+" ====================================
+" Focus on tagbar when it is opened
+let g:tagbar_autofocus = 1
+
+let g:tagbar_sort = 0
 
 " ====================================
 " Custom key bindings
