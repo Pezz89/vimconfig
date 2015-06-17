@@ -1,5 +1,5 @@
 " Vim settings
-let g:python_host_prog='/u/anasynth/perry/.pyenv/shims/python'
+let g:python_host_prog='~/.pyenv/shims/python'
 
 filetype off                  " required
 
