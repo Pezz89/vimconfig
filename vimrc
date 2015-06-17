@@ -1,5 +1,5 @@
 " Vim settings
-let g:python_host_prog='~/.pyenv/shims/python'
+let g:python_host_prog='/u/anasynth/perry/.pyenv/shims/python'
 
 filetype off                  " required
 
@@ -374,7 +374,7 @@ nmap <silent> <leader>sv :so $MYVIMRC<CR>
 " Source local vim script for the current machine
 " (Keep this at bottom to overwrite configs above with system specific
 " configs)
-if filereadable(expand("./vimrc.local"))
-    source ./vimrc.local
-endif
+"if filereadable(expand("./vimrc.local"))
+"    source ./vimrc.local
+"endif
 
