@@ -369,6 +369,11 @@ nnoremap <c-l> <c-w>l
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
+nnoremap <leader>L :set splitright <BAR> vsplit <BAR> set nosplitright <CR>
+nnoremap <leader>H :vsplit <CR>
+nnoremap <leader>J :set splitbelow <BAR> split <BAR> set nosplitbelow <CR>
+nnoremap <leader>K :split <CR>
+
 " ====================================
 
 " Source local vim script for the current machine
