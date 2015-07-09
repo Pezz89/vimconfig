@@ -67,3 +67,6 @@
 [submodule "bundle/vim-ProSession"]
 	path = bundle/vim-ProSession
 	url = git://github.com/dhruvasagar/vim-prosession.git
+[submodule "vim.symlink/Vundle.vim"]
+	path = vim.symlink/Vundle.vim
+	url = /Users/samuelperry/.vim/bundle/Vundle.vim
