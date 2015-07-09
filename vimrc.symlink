@@ -1,5 +1,5 @@
 " Vim settings
-let g:python_host_prog='/u/anasynth/perry/.pyenv/shims/python'
+let g:python_host_prog='/usr/bin/python'
 
 filetype off                  " required
 
@@ -259,7 +259,7 @@ set pumheight=20"
 " ====================================
 " YouCompleteMe Settings
 " ====================================
-let g:ycm_path_to_python_interpreter = '/usr/bin/python'
+let g:ycm_path_to_python_interpreter ='/usr/bin/python'
 
 " ====================================
 " VIMUX Commands
