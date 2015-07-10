@@ -109,11 +109,11 @@ let g:indentLine_enabled = 0
 " Set to the dark solarized colour scheme
 set background=dark
 let g:solarized_termtrans=1
-let g:solarized_termcolors=16
-let g:solarized_contrast="high"
+let g:solarized_termcolors=256
+" let g:solarized_contrast="high"
 let g:solarized_visibility="normal"
 colorscheme solarized
-" set t_Co=256                        " force vim to use 256 colors
+set t_Co=256                        " force vim to use 256 colors
 
 " ====================================
 " NerdTree Settings
