@@ -1,4 +1,4 @@
 .netrwhist
-bundle/**
+vim.symlink/bundle/**
 session/
 vimrc.local

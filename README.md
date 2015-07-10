@@ -54,6 +54,6 @@ Installing YouCompleteMe (YCM):
     # Run the install script from the YCM directory
     ./install.sh --clang-completer --system-libclang
 
-Fixing tmux Ctrl-h command for navigation:
+Fixing tmux-navigation (No idea what it does but run it when you've just installed neovim):
     infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > $TERM.ti
     tic $TERM.ti
