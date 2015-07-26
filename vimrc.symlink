@@ -35,6 +35,7 @@ Plugin 'embear/vim-localvimrc'
 Plugin 'tpope/vim-surround'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'Yggdroot/indentLine'
+Plugin 'mindriot101/vim-yapf'
 call vundle#end()            " required
 filetype on
 filetype plugin on
@@ -176,7 +177,7 @@ let g:pymode_options_max_line_length = 79
 
 " Set the display of a coloured column to represent the maximum line length
 " location
-let g:pymode_options_colorcolumn = 0
+let g:pymode_options_colorcolumn = 1
 
 " Turn indenting on
 let g:pymode_indent = 1
@@ -220,7 +221,23 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
 " Set the checkers to be used for finding syntax errors
-let g:syntastic_python_checkers = ['pyflakes']
+let g:syntastic_python_checkers = ['pep8', 'pyflakes', 'pep257']
+
+function! TogglePep257()
+    let c = 0
+    let found = 0
+    for i in g:syntastic_python_checkers
+        if i == 'pep257'
+            call remove(g:syntastic_python_checkers, c)
+            let found = 1
+        endif
+        let c += 1
+    endfor
+    if found == 0
+        call add(g:syntastic_python_checkers, 'pep257')
+    endif
+    :SyntasticCheck
+endfunction
 
 " Function for toggling the error window
 function! ToggleErrors()
@@ -278,12 +295,10 @@ map <Leader>vq :VimuxCloseRunner<CR>
 map <Leader>vs :VimuxInterruptRunner<CR>
 
 " ====================================
-" Custom key bindings
+" Tagbar Settings
 " ====================================
 " Focus on tagbar when it is opened
 let g:tagbar_autofocus = 1
-
-let g:tagbar_sort = 0
 
 " ====================================
 " Custom key bindings
@@ -309,8 +324,7 @@ nmap <F8> :TagbarToggle<CR>
 " Map the error window toggle to <F6>
 nmap <F6> :call ToggleErrors()<CR><CR>
 
-" Map PyMode linting shortcut
-nmap <leader>pl :PymodeLint<CR>
+nmap <F5> :call TogglePep257()<CR>
 
 " To open a new empty buffer
 " This replaces :tabnew which I used to bind to this mapping
@@ -332,6 +346,7 @@ nmap <leader>bl :ls<CR>
 " Toggle the NerdTree file browser menu
 nmap <F7> :NERDTreeToggle<CR>
 
+" Toggle session monitoring
 nmap <leader>o :Obsess<CR>
 
 " Copy too and from the system clipboard with standard yank and paste commands
@@ -367,6 +382,8 @@ nnoremap <c-l> <c-w>l
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
+" Call yapf formatting
+nnoremap <leader>y :call Yapf()<cr>
 " ====================================
 
 " Source local vim script for the current machine
