@@ -33,14 +33,16 @@ Plugin 'benmills/vimux'
 Plugin 'julienr/vimux-pyutils'
 Plugin 'embear/vim-localvimrc'
 Plugin 'tpope/vim-surround'
-Plugin 'Lokaltog/vim-easymotion'
+Plugin 'easymotion/vim-easymotion'
 Plugin 'Yggdroot/indentLine'
 Plugin 'mindriot101/vim-yapf'
+Plugin 'vim-scripts/TaskList.vim'
+Plugin 'vim-scripts/MatlabFilesEdition'
 call vundle#end()            " required
 filetype on
 filetype plugin on
 filetype indent on
-" ====================================
+" ===================================
 " General vim settings
 " ====================================
 " Set the default shell
@@ -96,6 +98,42 @@ set ignorecase
 
 " Show search result before moving to it
 set incsearch
+
+" Visual autocomplete for command menu
+set wildmenu
+
+" Redraw only when we need to.
+set lazyredraw          
+
+" move vertically by visual line. If lines are wrapped due to lack of screen
+" space they are still navigated as expected
+nnoremap j gj
+nnoremap k gk
+" ====================================
+" Easymotion Settings
+" ====================================
+"let g:EasyMotion_do_mapping = 0 " Disable default mappings
+
+" Bi-directional find motion
+" Jump to anywhere you want with minimal keystrokes, with just one key binding.
+" `s{char}{label}`
+nmap s <Plug>(easymotion-s)
+" or
+" `s{char}{char}{label}`
+" Need one more keystroke, but on average, it may be more comfortable.
+nmap s <Plug>(easymotion-s2)
+
+" Turn on case insensitive feature
+let g:EasyMotion_smartcase = 1
+
+" JK motions: Line motions
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+" Word jump
+map <Leader>w <Plug>(easymotion-w)
+map <Leader>e <Plug>(easymotion-e)
+map <Leader>bb <Plug>(easymotion-b)
+map <Leader>B <Plug>(easymotion-B)
 
 " ====================================
 " Indent highlighting settings
@@ -199,6 +237,8 @@ let g:pymode_syntax_all = 1
 
 let g:pymode_run = 0
 let g:pymode_run_bind = ''
+" Disable adding breakpoints with leader b
+let g:pymode_breakpoint = 0
 
 " ====================================
 " ProSession Settings
@@ -222,6 +262,8 @@ let g:syntastic_check_on_wq = 0
 
 " Set the checkers to be used for finding syntax errors
 let g:syntastic_python_checkers = ['pep8', 'pyflakes', 'pep257']
+
+let g:syntastic_matlab_checkers = ['mlint']
 
 function! TogglePep257()
     let c = 0
@@ -324,11 +366,12 @@ nmap <F8> :TagbarToggle<CR>
 " Map the error window toggle to <F6>
 nmap <F6> :call ToggleErrors()<CR><CR>
 
+" Toggle Pep257 Python linting with <F5>
 nmap <F5> :call TogglePep257()<CR>
 
 " To open a new empty buffer
 " This replaces :tabnew which I used to bind to this mapping
-nmap <leader>t :enew<CR>
+nmap <leader>n :enew<CR>
 
 " Move to the next buffer
 nmap <leader>l :bnext<CR>
@@ -362,7 +405,7 @@ vmap <Leader>P "+P
 set clipboard=unnamed
 
 " Enter visual line by hitting leader twice
-nmap <Leader><Leader> V
+"nmap <Leader><Leader> V
 
 " Map v to use expand-region plugin for selecting char, then word, then
 " paragraph 
@@ -381,6 +424,7 @@ nnoremap <c-l> <c-w>l
 " Quickly edit/reload the vimrc file
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
+nnoremap <leader>ez :vsp ~/.zshrc<CR>
 
 " Call yapf formatting
 nnoremap <leader>y :call Yapf()<cr>

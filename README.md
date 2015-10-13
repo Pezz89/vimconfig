@@ -47,12 +47,9 @@ Setting enviroment variables in .cshrc for VIM:
     setenv EDITOR 'vim'
 
 Installing YouCompleteMe (YCM):
-    # Set pyenv python to system version to avoid a broken compilation
-    pyenv global system
-    # A workaround to the lack of a "python2" executable with pyenv
-    cd /usr/bin && sudo ln -s python python2
     # Run the install script from the YCM directory
-    ./install.sh --clang-completer --system-libclang
+    /usr/bin/python ./install.py
+    # Note that Neovim must be builtusing pyenv's system version of python and that brew's python must be unlinked when doing this
 
 Fixing tmux-navigation (No idea what it does but run it when you've just installed neovim):
     infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > $TERM.ti
