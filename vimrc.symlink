@@ -38,6 +38,8 @@ Plugin 'Yggdroot/indentLine'
 Plugin 'mindriot101/vim-yapf'
 Plugin 'vim-scripts/TaskList.vim'
 Plugin 'vim-scripts/MatlabFilesEdition'
+Plugin 'lervag/vimtex'
+Plugin 'bjoernd/vim-ycm-tex'
 call vundle#end()            " required
 filetype on
 filetype plugin on
@@ -65,6 +67,9 @@ syntax on
 
 " set tabs to have 4 spaces
 set ts=4
+
+" Keep cursor near middle of page
+set scrolloff=10
 
 " indent when moving to the next line while writing code
 set autoindent
@@ -109,6 +114,11 @@ set lazyredraw
 " space they are still navigated as expected
 nnoremap j gj
 nnoremap k gk
+
+" OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
+" 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
+" The following changes the default filetype back to 'tex':
+let g:tex_flavor='latex'
 " ====================================
 " Easymotion Settings
 " ====================================
@@ -134,6 +144,12 @@ map <Leader>w <Plug>(easymotion-w)
 map <Leader>e <Plug>(easymotion-e)
 map <Leader>bb <Plug>(easymotion-b)
 map <Leader>B <Plug>(easymotion-B)
+
+" easymotion highlight colors
+hi link EasyMotionTarget Search
+hi link EasyMotionTarget2First Search
+hi link EasyMotionTarget2Second Search
+hi link EasyMotionShade Comment
 
 " ====================================
 " Indent highlighting settings
@@ -387,7 +403,7 @@ nmap <leader>bq :bp <BAR> bd! #<CR>
 nmap <leader>bl :ls<CR>
 
 " Toggle the NerdTree file browser menu
-nmap <F7> :NERDTreeToggle<CR>
+nnoremap <F4> :NERDTreeToggle<CR>
 
 " Toggle session monitoring
 nmap <leader>o :Obsess<CR>
@@ -428,6 +444,7 @@ nnoremap <leader>ez :vsp ~/.zshrc<CR>
 
 " Call yapf formatting
 nnoremap <leader>y :call Yapf()<cr>
+
 " ====================================
 
 " Source local vim script for the current machine
