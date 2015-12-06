@@ -36,7 +36,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'Yggdroot/indentLine'
 Plugin 'mindriot101/vim-yapf'
-Plugin 'vim-scripts/TaskList.vim'
+" Plugin 'vim-scripts/TaskList.vim'
 Plugin 'vim-scripts/MatlabFilesEdition'
 Plugin 'lervag/vimtex'
 Plugin 'bjoernd/vim-ycm-tex'
@@ -48,7 +48,7 @@ filetype indent on
 " General vim settings
 " ====================================
 " Set the default shell
-set shell=zsh\ -l
+set shell=zsh
 
 " Set spell checker language
 set spelllang=en_gb
@@ -110,15 +110,12 @@ set wildmenu
 " Redraw only when we need to.
 set lazyredraw          
 
-" move vertically by visual line. If lines are wrapped due to lack of screen
-" space they are still navigated as expected
-nnoremap j gj
-nnoremap k gk
 
 " OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
 " 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
 " The following changes the default filetype back to 'tex':
 let g:tex_flavor='latex'
+
 " ====================================
 " Easymotion Settings
 " ====================================
@@ -390,17 +387,14 @@ nmap <F5> :call TogglePep257()<CR>
 nmap <leader>n :enew<CR>
 
 " Move to the next buffer
-nmap <leader>l :bnext<CR>
+nmap <leader>bl :bnext<CR>
 
 " Move to the previous buffer
-nmap <leader>h :bprevious<CR>
+nmap <leader>bh :bprevious<CR>
 
 " Close the current buffer and move to the previous one
 " This replicates the idea of closing a tab
 nmap <leader>bq :bp <BAR> bd! #<CR>
-
-" Show all open buffers and their status
-nmap <leader>bl :ls<CR>
 
 " Toggle the NerdTree file browser menu
 nnoremap <F4> :NERDTreeToggle<CR>
@@ -431,11 +425,33 @@ vmap <C-v> <Plug>(expand_region_shrink)
 " Stop strange window from popping up when accidentally press q:
 map q: :q
 
-" Navigate vim windows with hjkl
-nnoremap <c-j> <c-w>j
-nnoremap <c-k> <c-w>k
-nnoremap <c-h> <c-w>h
-nnoremap <c-l> <c-w>l
+:nmap <silent> <C-h> :wincmd h<CR>
+:nmap <silent> <C-j> :wincmd j<CR>
+:nmap <silent> <C-k> :wincmd k<CR>
+:nmap <silent> <C-l> :wincmd l<CR>
+
+" Window resizing mappings /*{{{*/
+if bufwinnr(1)
+  noremap <silent> <S-H> :vertical resize +1<CR>
+  noremap <silent> <S-L> :vertical resize -1<CR>
+  noremap <silent> <S-J> :resize +1<CR>
+  noremap <silent> <S-K> :resize -1<CR>
+endif
+
+nmap <leader>r <C-w>R
+
+" window navigation/manipulation
+nmap <leader>h :topleft  vnew<CR>
+nmap <leader>l :botright vnew<CR>
+nmap <leader>k :topleft  new<CR>
+nmap <leader>j :botright new<CR>
+
+" Close the current window
+nmap <leader>x :q!<CR>
+
+" Quickly open a terminal
+nmap <leader>t :term<CR>
+tnoremap <Esc> <C-\><C-n>
 
 " Quickly edit/reload the vimrc file
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
@@ -445,6 +461,10 @@ nnoremap <leader>ez :vsp ~/.zshrc<CR>
 " Call yapf formatting
 nnoremap <leader>y :call Yapf()<cr>
 
+" move vertically by visual line. If lines are wrapped due to lack of screen
+" space they are still navigated as expected
+nnoremap j gj
+nnoremap k gk
 " ====================================
 
 " Source local vim script for the current machine

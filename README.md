@@ -2,6 +2,11 @@ Installation:
 	
 	git clone https://github.com/Pezz89/vimconfig.git ~/.vim
 
+link nvim config files to correct location.
+    mkdir -p ${XDG_CONFIG_HOME:=$HOME/.config}
+    ln -s ~/.vim $XDG_CONFIG_HOME/nvim
+    ln -s ~/.vimrc $XDG_CONFIG_HOME/nvim/init.vim
+
 Local vimrc (.lvimrc)
     once plugins have been installed, it is possible to set up a vimrc locally for both machine and individual projects
     create a file called .lvimrc in the home directory and it will be sourced any time a file is accessed in a sub folder of that directory
