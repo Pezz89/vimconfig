@@ -40,6 +40,7 @@ Plugin 'mindriot101/vim-yapf'
 Plugin 'vim-scripts/MatlabFilesEdition'
 Plugin 'lervag/vimtex'
 Plugin 'bjoernd/vim-ycm-tex'
+Plugin 'mhinz/vim-startify'
 call vundle#end()            " required
 filetype on
 filetype plugin on
@@ -110,6 +111,8 @@ set wildmenu
 " Redraw only when we need to.
 set lazyredraw          
 
+" Set line wrap to 79 charachters.
+set tw=79
 
 " OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
 " 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
@@ -274,7 +277,7 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
 " Set the checkers to be used for finding syntax errors
-let g:syntastic_python_checkers = ['pep8', 'pyflakes', 'pep257']
+let g:syntastic_python_checkers = ['pylint', 'pep8', 'pyflakes', 'pep257']
 
 let g:syntastic_matlab_checkers = ['mlint']
 
@@ -425,10 +428,17 @@ vmap <C-v> <Plug>(expand_region_shrink)
 " Stop strange window from popping up when accidentally press q:
 map q: :q
 
-:nmap <silent> <C-h> :wincmd h<CR>
-:nmap <silent> <C-j> :wincmd j<CR>
-:nmap <silent> <C-k> :wincmd k<CR>
-:nmap <silent> <C-l> :wincmd l<CR>
+nmap <silent> <C-h> :wincmd h<CR>
+nmap <silent> <C-j> :wincmd j<CR>
+nmap <silent> <C-k> :wincmd k<CR>
+nmap <silent> <C-l> :wincmd l<CR>
+" Navigate from terminal windows whilst in terminal mode
+tnoremap <C-h> <C-\><C-n>:wincmd h<CR>
+tnoremap <C-j> <C-\><C-n>:wincmd j<CR>
+tnoremap <C-k> <C-\><C-n>:wincmd k<CR>
+tnoremap <C-l> <C-\><C-n>:wincmd l<CR>
+" Always enter terminal windows in terminal mode
+autocmd BufWinEnter,WinEnter term://* startinsert
 
 " Window resizing mappings /*{{{*/
 if bufwinnr(1)
