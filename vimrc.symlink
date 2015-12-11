@@ -118,6 +118,11 @@ set tw=79
 " 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
 " The following changes the default filetype back to 'tex':
 let g:tex_flavor='latex'
+" ====================================
+" Startify Settings
+" ====================================
+
+nnoremap <silent> <leader>m :Startify<CR>
 
 " ====================================
 " Easymotion Settings
@@ -437,6 +442,10 @@ tnoremap <C-h> <C-\><C-n>:wincmd h<CR>
 tnoremap <C-j> <C-\><C-n>:wincmd j<CR>
 tnoremap <C-k> <C-\><C-n>:wincmd k<CR>
 tnoremap <C-l> <C-\><C-n>:wincmd l<CR>
+inoremap <C-h> <ESC>:wincmd h<CR>
+inoremap <C-j> <ESC>:wincmd j<CR>
+inoremap <C-k> <ESC>:wincmd k<CR>
+inoremap <C-l> <ESC>:wincmd l<CR>
 " Always enter terminal windows in terminal mode
 autocmd BufWinEnter,WinEnter term://* startinsert
 
