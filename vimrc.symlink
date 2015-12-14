@@ -114,10 +114,14 @@ set lazyredraw
 " Set line wrap to 79 charachters.
 set tw=79
 
+" Change directory to the directory of the current file.
+set autochdir
+
 " OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
 " 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
 " The following changes the default filetype back to 'tex':
 let g:tex_flavor='latex'
+let g:tex_conceal = ""
 " ====================================
 " Startify Settings
 " ====================================
