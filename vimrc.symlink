@@ -95,6 +95,9 @@ set showmatch
 
 " 
 set nu
+
+" Turn off beeps when you do something wrong.
+set noerrorbells
             
 " Set numbers to display relative to current cursor position in the file
 set relativenumber
@@ -207,6 +210,12 @@ set laststatus=2
 " This allows buffers to be hidden if you've modified a buffer.
 " This is almost a must if you wish to use buffers in this way.
 set hidden
+"
+" Move to the next buffer
+nnoremap <nowait> <leader>l :bnext<CR>
+" Move to the previous buffer
+nnoremap <leader>h :bprevious<CR>
+
 let g:airline#extensions#tabline#buffer_idx_mode = 1
 nmap <leader>1 <Plug>AirlineSelectTab1
 nmap <leader>2 <Plug>AirlineSelectTab2
@@ -464,10 +473,10 @@ endif
 nmap <leader>r <C-w>R
 
 " window navigation/manipulation
-nmap <leader>h :topleft  vnew<CR>
-nmap <leader>l :botright vnew<CR>
-nmap <leader>k :topleft  new<CR>
-nmap <leader>j :botright new<CR>
+"nmap <leader>h :topleft  vnew<CR>
+"nmap <leader>l :botright vnew<CR>
+"nmap <leader>k :topleft  new<CR>
+"nmap <leader>j :botright new<CR>
 
 " Close the current window
 nmap <leader>x :q!<CR>
