@@ -47,7 +47,7 @@ Plug 'zchee/deoplete-clang'
 Plug 'zchee/deoplete-jedi'
 Plug 'benekastah/neomake'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
+Plug 'jeetsukumaran/vim-buffergator'
 call plug#end()            " required
 filetype on
 filetype plugin on
@@ -151,6 +151,7 @@ set errorformat=%f:%l:%m
 
 if has('autocmd')
     autocmd! BufWritePost * Neomake
+    autocmd! BufEnter * Neomake
 endif
 
 "let g:neomake_open_list = 2
@@ -386,10 +387,10 @@ set concealcursor=vin
 
 " Complete options (disable preview scratch window, longest removed to aways
 " show menu)
-set completeopt=preview,preview
+set completeopt=preview,preview,longest,menuone
 
 " Limit popup menu height
-set pumheight=20"
+set pumheight=40"
 
 " ====================================
 " DeoPlete Settings
@@ -404,9 +405,10 @@ let g:deoplete#auto_completion_start_length = 0
 let g:min_pattern_length = 0
 
 " Allow navigation through auto-completions using tab.
+" deoplete tab-complete
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
-
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 " Set paths to homebrew clang library and executable for deoplete clang
 let g:deoplete#sources#clang#libclang_path = "/usr/local/Cellar/llvm/HEAD/lib/libclang.dylib"
 let g:deoplete#sources#clang#clang_header = "/usr/local/Cellar/llvm/HEAD/lib/clang"
