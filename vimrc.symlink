@@ -49,7 +49,7 @@ Plug 'zchee/deoplete-jedi'
 Plug 'benekastah/neomake'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'jeetsukumaran/vim-buffergator'
-Plug 'chriskempson/base16-vim'
+Plug 'chriskempson/base16-vim', { 'commit': '98aa775c5fd9156ada4f912a9af41f1c020da55d' }
 Plug 'vim-airline/vim-airline-themes'
 call plug#end()            " required
 filetype on
