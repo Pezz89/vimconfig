@@ -46,7 +46,7 @@ Plug 'Konfekt/FastFold'
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 Plug 'tpope/vim-dispatch'
 Plug 'justmao945/vim-clang'
-Plug 'zchee/deoplete-clang'
+" Plug 'zchee/deoplete-clang'
 Plug 'zchee/deoplete-jedi'
 Plug 'benekastah/neomake'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -425,14 +425,20 @@ let g:deoplete#enable_at_startup = 1
 set completeopt+=noinsert
 set completeopt-=preview
 let g:deoplete#enable_smart_case = 1
-let g:deoplete#auto_completion_start_length = 0
-let g:min_pattern_length = 0
+let g:deoplete#auto_completion_start_length = 1
+let g:min_pattern_length = 1
 
 " Allow navigation through auto-completions using tab.
 " deoplete tab-complete
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+inoremap <expr><BS> deoplete#mappings#smart_close_popup()."\<C-h>"
+
+function! s:my_cr_function() abort
+    return pumvisible() ? deoplete#mappings#close_popup() : "\<CR>"
+endfunction
 
 " Set paths to homebrew clang library and executable for deoplete clang
 let g:deoplete#sources#clang#libclang_path = "/usr/local/Cellar/llvm/HEAD/lib/libclang.dylib"
@@ -450,8 +456,13 @@ call deoplete#custom#set('buffer', 'rank', 9999)
 " ====================================
 " let g:ycm_path_to_python_interpreter ='/usr/bin/python'
 
+" ====================================
+" Bufexplorer Settings
+" ====================================
+
 imap <F3> <ESC>:ToggleBufExplorer<CR>
 map <F3> :ToggleBufExplorer<CR>
+
 " ====================================
 " VIMUX Commands
 " ====================================
@@ -624,6 +635,24 @@ endfunction
 
 nnoremap <silent> <Right> :call IntelligentVerticalResize('right')<CR>
 nnoremap <silent> <Left> :call IntelligentVerticalResize('left')<CR>
+
+function! s:buflist()
+  redir => ls
+  silent ls
+  redir END
+  return split(ls, '\n')
+endfunction
+
+function! s:bufopen(e)
+  execute 'buffer' matchstr(a:e, '^[ 0-9]*')
+endfunction
+
+nnoremap <silent> <Leader><Enter> :call fzf#run({
+\   'source':  reverse(<sid>buflist()),
+\   'sink':    function('<sid>bufopen'),
+\   'options': '+m',
+\   'down':    len(<sid>buflist()) + 2
+\ })<CR>
 
 " When switching colorscheme in terminal vim change the profile in iTerm as well.
 "if !has('gui_running')
