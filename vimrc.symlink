@@ -147,7 +147,7 @@ set autochdir
 let g:tex_flavor='latex'
 let g:tex_conceal = ""
 
-autocmd BufWritePost *.tex Dispatch! latexmk -pdf
+autocmd BufWritePost *.tex Dispatch! latexmk -xelatex
 
 " ====================================
 " Startify Settings
@@ -426,8 +426,8 @@ let g:deoplete#enable_at_startup = 1
 set completeopt+=noinsert
 set completeopt-=preview
 let g:deoplete#enable_smart_case = 1
-let g:deoplete#auto_completion_start_length = 1
-let g:min_pattern_length = 1
+let g:deoplete#auto_completion_start_length = 0
+let g:min_pattern_length = 0
 
 " Allow navigation through auto-completions using tab.
 " deoplete tab-complete
