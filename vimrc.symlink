@@ -1,6 +1,8 @@
 " Find the filepath to the currently active pyenv pythons and use these as the
 " python programs.
-let g:python_host_prog=system("pyenv which python | xargs echo -n")
+" let g:python_host_prog=system("pyenv which python | xargs echo -n")
+let g:python_host_prog="/usr/bin/python"
+
 let g:python3_host_prog=system("pyenv which python3 | xargs echo -n")
 filetype off                  " required
 
@@ -13,43 +15,48 @@ function! DoRemote(arg)
 endfunction
 " let Vundle manage Vundle, required
 " Plug 'Valloric/YouCompleteMe'
+Plug 'tpope/vim-unimpaired'
 Plug 'sudar/vim-arduino-syntax'
 Plug 'bling/vim-airline'
 Plug 'docunext/closetag.vim'
-Plug 'rizzatti/dash.vim'
+Plug 'critiqjo/lldb.nvim'
+" Plug 'rizzatti/dash.vim'
 Plug 'terryma/vim-expand-region'
+" Plug 'sophacles/vim-processing'
 Plug 'tpope/vim-fugitive'
-Plug 'othree/html5.vim'
+" Plug 'othree/html5.vim'
 Plug 'klen/python-mode'
-Plug 'jplaut/vim-arduino-ino'
+" Plug 'derekwyatt/vim-scala'
+" Plug 'jplaut/vim-arduino-ino'
+" Plug 'stevearc/vim-arduino'
 " Plug 'altercation/vim-colors-solarized'
-Plug 'rstacruz/sparkup'
-Plug 'scrooloose/syntastic'
+" Plug 'rstacruz/sparkup'
+" Plug 'scrooloose/syntastic'
 Plug 'majutsushi/tagbar'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'jelera/vim-javascript-syntax'
+" Plug 'jelera/vim-javascript-syntax'
 Plug 'tpope/vim-obsession'
 Plug 'nvie/vim-togglemouse'
 Plug 'benmills/vimux'
 Plug 'julienr/vimux-pyutils'
 Plug 'embear/vim-localvimrc'
 Plug 'tpope/vim-surround'
-Plug 'easymotion/vim-easymotion'
+" Plug 'easymotion/vim-easymotion'
 Plug 'Yggdroot/indentLine'
-Plug 'mindriot101/vim-yapf'
+" Plug 'mindriot101/vim-yapf'
 Plug 'scrooloose/nerdtree'
 " Plug 'vim-scripts/TaskList.vim'
-Plug 'xolox/vim-notes'
-Plug 'xolox/vim-misc'
+" Plug 'xolox/vim-notes'
+" Plug 'xolox/vim-misc'
 Plug 'tpope/vim-vinegar'
 Plug 'vim-scripts/MatlabFilesEdition'
 Plug 'lervag/vimtex'
-Plug 'bjoernd/vim-ycm-tex'
+" Plug 'bjoernd/vim-ycm-tex'
 Plug 'mhinz/vim-startify'
-Plug 'Konfekt/FastFold'
+" Plug 'Konfekt/FastFold'
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 Plug 'tpope/vim-dispatch'
-Plug 'justmao945/vim-clang'
+" Plug 'justmao945/vim-clang'
 " Plug 'zchee/deoplete-clang'
 Plug 'zchee/deoplete-jedi'
 Plug 'benekastah/neomake'
@@ -59,11 +66,19 @@ Plug 'chriskempson/base16-vim', { 'commit': '98aa775c5fd9156ada4f912a9af41f1c020
 Plug 'vim-airline/vim-airline-themes'
 Plug 'danro/rename.vim'
 " Plug 'vim-scripts/LanguageTool'
-" Plug 'vim-latex/vim-latex'
+"Plug 'vim-latex/vim-latex'
 call plug#end()            " required
 filetype on
 filetype plugin on
 filetype indent on
+
+" backup files (~) in a common location if possible
+" set backup
+" set backupdir=~/.vim/_backup/,~/tmp
+
+" turn on undo files, put them in a common location
+set undofile
+set undodir=~/.vim/_undo/
 
 if filereadable(expand("~/.vimrc_background"))
   let base16colorspace=256
@@ -108,7 +123,7 @@ set shiftwidth=4
 " remove 4 spaces as if it were a tab
 set softtabstop=4
 
-" show a visual line under the cursor's current line 
+" show a visual line under the cursor's current line
 set cursorline
 
 " enable all Python syntax highlighting features
@@ -117,12 +132,12 @@ let python_highlight_all = 1
 " show the matching part of the pair for [] {} and ()
 set showmatch
 
-" 
+"
 set nu
 
 " Turn off beeps when you do something wrong.
 set noerrorbells
-            
+
 " Set numbers to display relative to current cursor position in the file
 set relativenumber
 
@@ -136,14 +151,29 @@ set incsearch
 set wildmenu
 
 " Redraw only when we need to.
-set lazyredraw          
+set lazyredraw
 
 " Set line wrap to 79 charachters.
-" set tw=79
+set tw=79
 
 " Change directory to the directory of the current file.
 set autochdir
 
+
+set list          " Display unprintable characters f12 - switches
+set showbreak=↪\
+set listchars=tab:••,trail:•,extends:»,precedes:«,eol:⏎,nbsp:• " Unprintable chars mapping
+" Clear search highlighting
+nnoremap <silent> <esc> :noh<cr><esc>
+" ====================================
+" Indent highlighting settings
+" ====================================
+let g:indentLine_char = '•'
+let g:indentLine_color_term = 19
+let g:indentLine_enabled = 1
+"let g:indentLine_leadingSpaceChar = '·'
+"let g:indentLine_leadingSpaceEnabled = 1
+let g:indentLine_faster = 1
 " ====================================
 " LaTeX Settings
 " ====================================
@@ -153,7 +183,7 @@ set autochdir
 let g:tex_flavor='latex'
 let g:tex_conceal = ""
 
-autocmd BufWritePost *.tex Dispatch! latexmk -xelatex
+" autocmd BufWritePost *.tex Dispatch! latexmk -xelatex
 
 " ====================================
 " Startify Settings
@@ -171,21 +201,45 @@ if has('autocmd')
     autocmd! BufReadPost,FileReadPost * Neomake
 endif
 
-let g:neomake_cpp_enable_markers=['clang']
+" Enable neomake debugging via :messages
+" let g:neomake_verbose = 3
+
+
+
+let g:neomake_java_javac_maker = {
+        \ 'errorformat':
+            \ '%E%f:%l: %trror: %m,' .
+            \ '%W%f:%l: %tarning: %m,' .
+            \ '%E%f:%l: %m,'.
+            \ '%Z%p^,'.
+            \ '%-G%.%#',
+        \ }
+let g:neomake_java_enabled_makers = ['javac']
+
+let g:neomake_matlab_mlint_maker = {
+        \ 'errorformat':
+        \ 'L %l (C %c): %*[a-zA-Z0-9]: %m,'.
+        \ 'L %l (C %c-%*[0-9]): %*[a-zA-Z0-9]: %m',
+        \ 'args': ['%:p', '-id'],
+        \ 'defaults': { 'type': 'W' },
+        \}
+
+let g:neomake_matlab_enabled_makers = ['mlint']
+
 "let g:neomake_cpp_clang_args = ["-std=c++14"]
 "let g:neomake_open_list = 2
 "
-"let g:neomake_python_enabled_makers = ['pep8', 'pylint']
+let g:neomake_python_enabled_makers = ['pep8', 'pylint']
 "
-"let g:neomake_warning_sign = {
-"  \ 'text': '✹',
-"  \ 'texthl': 'WarningMsg',
-"  \ }
+" let g:neomake_warning_sign = {
+"   \ 'text': '✹',
+"   \ 'texthl': 'WarningMsg',
+"   \ }
 "
-"let g:neomake_error_sign = {
-"  \ 'text': '✖',
-"  \ 'texthl': 'ErrorMsg',
-"  \ }
+" let g:neomake_error_sign = {
+"   \ 'text': '✖',
+"   \ 'texthl': 'ErrorMsg',
+"   \ }
 " ====================================
 " Easymotion Settings
 " ====================================
@@ -194,36 +248,30 @@ let g:neomake_cpp_enable_markers=['clang']
 " Bi-directional find motion
 " Jump to anywhere you want with minimal keystrokes, with just one key binding.
 " `s{char}{label}`
-nmap s <Plug>(easymotion-s)
+" nmap s <Plug>(easymotion-s)
 " or
 " `s{char}{char}{label}`
 " Need one more keystroke, but on average, it may be more comfortable.
-nmap s <Plug>(easymotion-s2)
+" nmap s <Plug>(easymotion-s2)
 
 " Turn on case insensitive feature
-let g:EasyMotion_smartcase = 1
+" let g:EasyMotion_smartcase = 1
 
 " JK motions: Line motions
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
+" map <Leader>j <Plug>(easymotion-j)
+" map <Leader>k <Plug>(easymotion-k)
 " Word jump
-map <Leader>w <Plug>(easymotion-w)
-map <Leader>e <Plug>(easymotion-e)
-map <Leader>bb <Plug>(easymotion-b)
-map <Leader>B <Plug>(easymotion-B)
+" map <Leader>w <Plug>(easymotion-w)
+" map <Leader>e <Plug>(easymotion-e)
+" map <Leader>bb <Plug>(easymotion-b)
+" map <Leader>B <Plug>(easymotion-B)
 
 " easymotion highlight colors
-hi link EasyMotionTarget Search
-hi link EasyMotionTarget2First Search
-hi link EasyMotionTarget2Second Search
-hi link EasyMotionShade Comment
+" hi link EasyMotionTarget Search
+" hi link EasyMotionTarget2First Search
+" hi link EasyMotionTarget2Second Search
+" hi link EasyMotionShade Comment
 
-" ====================================
-" Indent highlighting settings
-" ====================================
-let g:indentLine_char = '▸'
-let g:indentLine_color_term = 0
-let g:indentLine_enabled = 0
 
 " ====================================
 " solarized settings
@@ -247,6 +295,8 @@ let g:NERDTreeDirArrows=0
 " Bufexplorer Settings
 " ====================================
 let g:bufExplorerSortBy='name'
+let g:bufExplorerShowRelativePath=1
+let g:bufExplorerFindActive=0
 
 " ====================================
 " Netrw Settings
@@ -263,25 +313,27 @@ let g:localvimrc_event = [ "BufWinEnter", "VimEnter" ]
 let g:localvimrc_persistent = 2
 
 " ====================================
-" Airline settings 
+" Airline settings
 " ====================================
-" let g:airline#extensions#tabline#enabled = 1
-" let g:airline#extensions#tabline#fnamemod = ':t'
-" let g:airline#extensions#tabline#buffer_nr_format = '%s: '
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#tabline#buffer_nr_format = '%s: '
 "Remove seperators and makes airline look cleaner
 let g:airline_left_sep=''
 let g:airline_right_sep=''
-let g:airline_section_z=''
+let g:airline_skip_empty_sections = 1
+" let g:airline_section_z=''
 " Show airline even when only one file is open
 set laststatus=2
 " This allows buffers to be hidden if you've modified a buffer.
 " This is almost a must if you wish to use buffers in this way.
 set hidden
-"
+
+set switchbuf=usetab,newtab
 " Move to the next buffer
-nnoremap <nowait> <leader>l :bnext<CR>
+nnoremap <nowait> <leader>l :tabnext<CR>
 " Move to the previous buffer
-nnoremap <leader>h :bprevious<CR>
+nnoremap <leader>h :tabprev<CR>
 
 let g:airline#extensions#tabline#buffer_idx_mode = 1
 nmap <leader>1 <Plug>AirlineSelectTab1
@@ -352,65 +404,65 @@ let g:prosession_load_on_startup = 1
 " ====================================
 " Syntastic
 " ====================================
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
 
-let g:syntastic_mode_map = {
-        \ "mode": "passive",
-        \ "active_filetypes": [],
-        \ "passive_filetypes": [] }
-let g:syntastic_always_populate_loc_list = 1
-
-" Check for errors when opening a new file
-let g:syntastic_check_on_open = 1
-
-" Don't check for errors if quiting after writing
-let g:syntastic_check_on_wq = 0
-
-let g:syntastic_check_on_w = 0
-
-map <leader>c :SyntasticCheck<CR>
-
-" Set the checkers to be used for finding syntax errors
-let g:syntastic_python_checkers = ['pylint', 'pep8']
-
-let g:syntastic_matlab_checkers = ['mlint']
-
-function! TogglePep257()
-    let c = 0
-    let found = 0
-    for i in g:syntastic_python_checkers
-        if i == 'pep257'
-            call remove(g:syntastic_python_checkers, c)
-            let found = 1
-        endif
-        let c += 1
-    endfor
-    if found == 0
-        call add(g:syntastic_python_checkers, 'pep257')
-    endif
-    :SyntasticCheck
-endfunction
-
-" Function for toggling the error window
-function! ToggleErrors()
-    let old_last_winnr = winnr('$')
-    lclose
-    if old_last_winnr == winnr('$')
-        " Nothing was closed, open syntastic error location panel
-        Errors
-    endif
-endfunction
-
-let g:syntastic_auto_loc_list = 0
-
-" Run all checkers and then create list of errors rather than showing error
-" lists individually
-let g:syntastic_aggregate_errors = 1
+" let g:syntastic_mode_map = {
+"         \ "mode": "passive",
+"         \ "active_filetypes": [],
+"         \ "passive_filetypes": [] }
+" let g:syntastic_always_populate_loc_list = 1
 "
-" Set JavaScript syntax checkers
-let g:syntastic_javascript_checkers = ['jshint']
+" " Check for errors when opening a new file
+" let g:syntastic_check_on_open = 1
+"
+" " Don't check for errors if quiting after writing
+" let g:syntastic_check_on_wq = 0
+"
+" let g:syntastic_check_on_w = 0
+"
+" map <leader>c :SyntasticCheck<CR>
+"
+" " Set the checkers to be used for finding syntax errors
+" let g:syntastic_python_checkers = ['pylint', 'pep8']
+"
+" let g:syntastic_matlab_checkers = ['mlint']
+"
+" function! TogglePep257()
+"     let c = 0
+"     let found = 0
+"     for i in g:syntastic_python_checkers
+"         if i == 'pep257'
+"             call remove(g:syntastic_python_checkers, c)
+"             let found = 1
+"         endif
+"         let c += 1
+"     endfor
+"     if found == 0
+"         call add(g:syntastic_python_checkers, 'pep257')
+"     endif
+"     :SyntasticCheck
+" endfunction
+"
+" " Function for toggling the error window
+" function! ToggleErrors()
+"     let old_last_winnr = winnr('$')
+"     lclose
+"     if old_last_winnr == winnr('$')
+"         " Nothing was closed, open syntastic error location panel
+"         Errors
+"     endif
+" endfunction
+"
+" let g:syntastic_auto_loc_list = 0
+"
+" " Run all checkers and then create list of errors rather than showing error
+" " lists individually
+" let g:syntastic_aggregate_errors = 1
+" "
+" " Set JavaScript syntax checkers
+" let g:syntastic_javascript_checkers = ['jshint']
 
 autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
@@ -497,6 +549,19 @@ map <Leader>vs :VimuxInterruptRunner<CR>
 let g:tagbar_autofocus = 1
 
 " ====================================
+" LLDB Settings
+" ====================================
+nmap <M-b> <Plug>LLBreakSwitch
+vmap <F2> <Plug>LLStdInSelected
+nnoremap <F4> :LLstdin<CR>
+nnoremap <F5> :LLmode debug<CR>
+nnoremap <S-F5> :LLmode code<CR>
+nnoremap <F8> :LL continue<CR>
+nnoremap <S-F8> :LL process interrupt<CR>
+nnoremap <F9> :LL print <C-R>=expand('<cword>')<CR>
+vnoremap <F9> :<C-U>LL print <C-R>=lldb#util#get_selection()<CR><CR>
+
+" ====================================
 " LanguageTool Settings
 " ====================================
 let g:languagetool_jar=system("find $(brew --prefix)/Cellar -name \"languagetool-commandline.jar\" -print -quit | xargs echo -n")
@@ -518,15 +583,14 @@ set backspace=indent,eol,start
 " Show commands used in the botom right
 set showcmd
 
-" Activate/deactivate the Tagbar 
+" Activate/deactivate the Tagbar
 nmap <F8> :TagbarToggle<CR>
 
 " Map the error window toggle to <F6>
 nmap <F6> :call ToggleErrors()<CR><CR>
 
 " To open a new empty buffer
-" This replaces :tabnew which I used to bind to this mapping
-nmap <leader>n :enew<CR>
+nmap <leader>n :tabnew<CR>
 
 " Move to the next buffer
 nmap <leader>bl :bnext<CR>
@@ -544,6 +608,15 @@ nnoremap <F4> :NERDTreeToggle<CR>
 " Toggle session monitoring
 nmap <leader>o :Obsess<CR>
 
+"Remove all trailing whitespace by pressing F5
+fun! TrimWhitespace()
+    let l:save = winsaveview()
+    %s/\s\+$//e
+    call winrestview(l:save)
+endfun
+command! TrimWhitespace call TrimWhitespace()
+noremap <Leader>tw :call TrimWhitespace()<CR>
+
 " Copy too and from the system clipboard with standard yank and paste commands
 " but with leader
 vmap <Leader>y "+y
@@ -555,12 +628,22 @@ vmap <Leader>P "+P
 
 " Set clipboard to system clipboard
 set clipboard=unnamed
+function! ClipboardYank()
+  call system('pbcopy', @@)
+endfunction
+function! ClipboardPaste()
+  let @@ = system('pbpaste')
+endfunction
+
+vnoremap <silent> y y:call ClipboardYank()<cr>
+vnoremap <silent> d d:call ClipboardYank()<cr>
+nnoremap <silent> p :call ClipboardPaste()<cr>p
 
 " Enter visual line by hitting leader twice
 "nmap <Leader><Leader> V
 
 " Map v to use expand-region plugin for selecting char, then word, then
-" paragraph 
+" paragraph
 vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
 
@@ -610,7 +693,7 @@ tnoremap <Esc> <C-\><C-n>
 " Quickly edit/reload the vimrc file
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
 "nmap <silent> <leader>sv :so $MYVIMRC<CR>
-nnoremap <leader>ez :vsp ~/.zshrc<CR>
+nnoremap <leader>er :vsp ~/.zshrc<CR>
 
 " Call yapf formatting
 nnoremap <leader>y :call Yapf()<cr>
@@ -740,11 +823,13 @@ nnoremap <silent> <Leader><Enter> :call fzf#run({
 "         endif
 "     endif
 " endif
+"
 
-if (v:version >= 700) 
-highlight SpellBad      ctermfg=126         term=Reverse        guisp=126       gui=undercurl   ctermbg=None 
-highlight SpellCap      ctermfg=Green       term=Reverse        guisp=Green     gui=undercurl   ctermbg=None 
-highlight SpellLocal    ctermfg=Cyan        term=Underline      guisp=Cyan      gui=undercurl   ctermbg=None 
-highlight SpellRare     ctermfg=Magenta     term=underline      guisp=Magenta   gui=undercurl   ctermbg=None 
-endif " version 7+ 
+if (v:version >= 700)
+highlight SpellBad      ctermfg=126         term=Reverse        guisp=126       gui=undercurl   ctermbg=None
+highlight SpellCap      ctermfg=Green       term=Reverse        guisp=Green     gui=undercurl   ctermbg=None
+highlight SpellLocal    ctermfg=Cyan        term=Underline      guisp=Cyan      gui=undercurl   ctermbg=None
+highlight SpellRare     ctermfg=Magenta     term=underline      guisp=Magenta   gui=undercurl   ctermbg=None
+endif " version 7+
 
+hi NonText ctermfg=19 guifg=gray
