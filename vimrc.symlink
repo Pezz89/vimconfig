@@ -67,6 +67,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'danro/rename.vim'
 " Plug 'vim-scripts/LanguageTool'
 "Plug 'vim-latex/vim-latex'
+Plug 'roman/golden-ratio'
 call plug#end()            " required
 filetype on
 filetype plugin on
@@ -132,7 +133,7 @@ let python_highlight_all = 1
 " show the matching part of the pair for [] {} and ()
 set showmatch
 
-"
+" Set number line?
 set nu
 
 " Turn off beeps when you do something wrong.
@@ -157,14 +158,12 @@ set lazyredraw
 set tw=79
 
 " Change directory to the directory of the current file.
-set autochdir
+" set autochdir
 
 
 set list          " Display unprintable characters f12 - switches
 set showbreak=↪\
 set listchars=tab:••,trail:•,extends:»,precedes:«,eol:⏎,nbsp:• " Unprintable chars mapping
-" Clear search highlighting
-nnoremap <silent> <esc> :noh<cr><esc>
 " ====================================
 " Indent highlighting settings
 " ====================================
@@ -315,9 +314,17 @@ let g:localvimrc_persistent = 2
 " ====================================
 " Airline settings
 " ====================================
+" Enable tabline
 let g:airline#extensions#tabline#enabled = 1
+" Set tabs to display the name of the currently active file
 let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline#extensions#tabline#buffer_nr_format = '%s: '
+let g:airline#extensions#tabline#show_tab_nr = 0
+
+let g:airline#extensions#tabline#fnametruncate = 4
+"let g:airline#extensions#tabline#buffer_nr_format = '%s:'
+" Don't make a new tab for every buffer
+let g:airline#extensions#tabline#show_buffers = 0
+
 "Remove seperators and makes airline look cleaner
 let g:airline_left_sep=''
 let g:airline_right_sep=''
@@ -331,11 +338,11 @@ set hidden
 
 set switchbuf=usetab,newtab
 " Move to the next buffer
-nnoremap <nowait> <leader>l :tabnext<CR>
+"nnoremap <nowait> <leader>l :tabnext<CR>
 " Move to the previous buffer
-nnoremap <leader>h :tabprev<CR>
+"nnoremap  :tabprev<CR>
 
-let g:airline#extensions#tabline#buffer_idx_mode = 1
+"let g:airline#extensions#tabline#buffer_idx_mode = 1
 nmap <leader>1 <Plug>AirlineSelectTab1
 nmap <leader>2 <Plug>AirlineSelectTab2
 nmap <leader>3 <Plug>AirlineSelectTab3
@@ -345,6 +352,8 @@ nmap <leader>6 <Plug>AirlineSelectTab6
 nmap <leader>7 <Plug>AirlineSelectTab7
 nmap <leader>8 <Plug>AirlineSelectTab8
 nmap <leader>9 <Plug>AirlineSelectTab9
+nmap <leader>h <Plug>AirlineSelectPrevTab
+nmap <leader>l <Plug>AirlineSelectNextTab
 
 let g:airline_theme = 'base16'
 
@@ -589,7 +598,7 @@ nmap <F8> :TagbarToggle<CR>
 " Map the error window toggle to <F6>
 nmap <F6> :call ToggleErrors()<CR><CR>
 
-" To open a new empty buffer
+" To open a new empty tab
 nmap <leader>n :tabnew<CR>
 
 " Move to the next buffer
@@ -600,7 +609,8 @@ nmap <leader>bh :bprevious<CR>
 
 " Close the current buffer and move to the previous one
 " This replicates the idea of closing a tab
-nmap <leader>bq :bp <BAR> bd! #<CR>
+nmap <leader>bq :bp<BAR>sp<BAR>bn<BAR>bd<CR>
+nmap <leader>tq :close<CR>
 
 " Toggle the NerdTree file browser menu
 nnoremap <F4> :NERDTreeToggle<CR>
@@ -649,11 +659,14 @@ vmap <C-v> <Plug>(expand_region_shrink)
 
 " Stop strange window from popping up when accidentally press q:
 map q: :q
+map Q: :q
+map Q; :q
+map q; :q
 
-nmap <silent> <C-h> :wincmd h<CR>
-nmap <silent> <C-j> :wincmd j<CR>
-nmap <silent> <C-k> :wincmd k<CR>
-nmap <silent> <C-l> :wincmd l<CR>
+" nmap <silent> <C-h> :wincmd h<BAR>call Splitresize()<CR>
+" nmap <silent> <C-j> :wincmd j<BAR>call Splitresize()<CR>
+" nmap <silent> <C-k> :wincmd k<BAR>call Splitresize()<CR>
+" nmap <silent> <C-l> :wincmd l<BAR>call Splitresize()<CR>
 " Navigate from terminal windows whilst in terminal mode
 tnoremap <C-h> <C-\><C-n>:wincmd h<CR>
 tnoremap <C-j> <C-\><C-n>:wincmd j<CR>
@@ -663,6 +676,9 @@ inoremap <C-h> <ESC>:wincmd h<CR>
 inoremap <C-j> <ESC>:wincmd j<CR>
 inoremap <C-k> <ESC>:wincmd k<CR>
 inoremap <C-l> <ESC>:wincmd l<CR>
+
+" Clear search highlighting
+nnoremap <silent> <esc> :noh<cr><esc>
 
 " Always enter terminal windows in terminal mode
 autocmd BufWinEnter,WinEnter term://* startinsert
@@ -683,9 +699,6 @@ nmap <leader>r <C-w>R
 "nmap <leader>k :topleft  new<CR>
 "nmap <leader>j :botright new<CR>
 
-" Close the current window
-nmap <leader>x :q!<CR>
-
 " Quickly open a terminal
 nmap <leader>t :term<CR>
 tnoremap <Esc> <C-\><C-n>
@@ -696,7 +709,7 @@ nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nnoremap <leader>er :vsp ~/.zshrc<CR>
 
 " Call yapf formatting
-nnoremap <leader>y :call Yapf()<cr>
+" nnoremap <leader>y :call Yapf()<cr>
 
 " move vertically by visual line. If lines are wrapped due to lack of screen
 " space they are still navigated as expected
