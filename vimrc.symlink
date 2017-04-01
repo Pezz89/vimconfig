@@ -59,7 +59,8 @@ Plug 'tpope/vim-dispatch'
 " Plug 'justmao945/vim-clang'
 " Plug 'zchee/deoplete-clang'
 Plug 'zchee/deoplete-jedi'
-Plug 'benekastah/neomake'
+" Plug 'benekastah/neomake'
+Plug 'w0rp/ale'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'jlanzarotta/bufexplorer'
 Plug 'chriskempson/base16-vim', { 'commit': '98aa775c5fd9156ada4f912a9af41f1c020da55d' }
@@ -195,50 +196,50 @@ nnoremap <silent> <leader>m :Startify<CR>
 " ====================================
 set errorformat=%f:%l:%m
 
-if has('autocmd')
-    autocmd! BufWritePost * Neomake
-    autocmd! BufReadPost,FileReadPost * Neomake
-endif
-
-" Enable neomake debugging via :messages
-" let g:neomake_verbose = 3
-
-
-
-let g:neomake_java_javac_maker = {
-        \ 'errorformat':
-            \ '%E%f:%l: %trror: %m,' .
-            \ '%W%f:%l: %tarning: %m,' .
-            \ '%E%f:%l: %m,'.
-            \ '%Z%p^,'.
-            \ '%-G%.%#',
-        \ }
-let g:neomake_java_enabled_makers = ['javac']
-
-let g:neomake_matlab_mlint_maker = {
-        \ 'errorformat':
-        \ 'L %l (C %c): %*[a-zA-Z0-9]: %m,'.
-        \ 'L %l (C %c-%*[0-9]): %*[a-zA-Z0-9]: %m',
-        \ 'args': ['%:p', '-id'],
-        \ 'defaults': { 'type': 'W' },
-        \}
-
-let g:neomake_matlab_enabled_makers = ['mlint']
-
-"let g:neomake_cpp_clang_args = ["-std=c++14"]
-"let g:neomake_open_list = 2
-"
-let g:neomake_python_enabled_makers = ['pep8', 'pylint']
-"
-" let g:neomake_warning_sign = {
-"   \ 'text': '✹',
-"   \ 'texthl': 'WarningMsg',
-"   \ }
-"
-" let g:neomake_error_sign = {
-"   \ 'text': '✖',
-"   \ 'texthl': 'ErrorMsg',
-"   \ }
+" if has('autocmd')
+"     autocmd! BufWritePost * Neomake
+"     autocmd! BufReadPost,FileReadPost * Neomake
+" endif
+" 
+" " Enable neomake debugging via :messages
+" " let g:neomake_verbose = 3
+" 
+" 
+" 
+" let g:neomake_java_javac_maker = {
+"         \ 'errorformat':
+"             \ '%E%f:%l: %trror: %m,' .
+"             \ '%W%f:%l: %tarning: %m,' .
+"             \ '%E%f:%l: %m,'.
+"             \ '%Z%p^,'.
+"             \ '%-G%.%#',
+"         \ }
+" let g:neomake_java_enabled_makers = ['javac']
+" 
+" let g:neomake_matlab_mlint_maker = {
+"         \ 'errorformat':
+"         \ 'L %l (C %c): %*[a-zA-Z0-9]: %m,'.
+"         \ 'L %l (C %c-%*[0-9]): %*[a-zA-Z0-9]: %m',
+"         \ 'args': ['%:p', '-id'],
+"         \ 'defaults': { 'type': 'W' },
+"         \}
+" 
+" let g:neomake_matlab_enabled_makers = ['mlint']
+" 
+" "let g:neomake_cpp_clang_args = ["-std=c++14"]
+" "let g:neomake_open_list = 2
+" "
+" let g:neomake_python_enabled_makers = ['pep8', 'pylint']
+" "
+" " let g:neomake_warning_sign = {
+" "   \ 'text': '✹',
+" "   \ 'texthl': 'WarningMsg',
+" "   \ }
+" "
+" " let g:neomake_error_sign = {
+" "   \ 'text': '✖',
+" "   \ 'texthl': 'ErrorMsg',
+" "   \ }
 " ====================================
 " Easymotion Settings
 " ====================================
@@ -574,6 +575,12 @@ vnoremap <F9> :<C-U>LL print <C-R>=lldb#util#get_selection()<CR><CR>
 " LanguageTool Settings
 " ====================================
 let g:languagetool_jar=system("find $(brew --prefix)/Cellar -name \"languagetool-commandline.jar\" -print -quit | xargs echo -n")
+
+" ====================================
+" Golden Ratio settings
+" ====================================
+let g:golden_ratio_exclude_nonmodifiable = 1
+
 " ====================================
 " Custom key bindings
 " ====================================
@@ -599,7 +606,7 @@ nmap <F8> :TagbarToggle<CR>
 nmap <F6> :call ToggleErrors()<CR><CR>
 
 " To open a new empty tab
-nmap <leader>n :tabnew<CR>
+nmap <leader>n :enew<CR>
 
 " Move to the next buffer
 nmap <leader>bl :bnext<CR>
@@ -700,7 +707,7 @@ nmap <leader>r <C-w>R
 "nmap <leader>j :botright new<CR>
 
 " Quickly open a terminal
-nmap <leader>t :term<CR>
+nmap <leader>t :tabedit<CR>
 tnoremap <Esc> <C-\><C-n>
 
 " Quickly edit/reload the vimrc file
