@@ -54,10 +54,11 @@ Plug 'lervag/vimtex'
 " Plug 'bjoernd/vim-ycm-tex'
 Plug 'mhinz/vim-startify'
 " Plug 'Konfekt/FastFold'
-Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+"Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+Plug 'roxma/nvim-completion-manager'
 Plug 'tpope/vim-dispatch'
 " Plug 'justmao945/vim-clang'
-" Plug 'zchee/deoplete-clang'
+Plug 'zchee/deoplete-clang'
 Plug 'zchee/deoplete-jedi'
 " Plug 'benekastah/neomake'
 Plug 'w0rp/ale'
@@ -66,10 +67,17 @@ Plug 'jlanzarotta/bufexplorer'
 Plug 'chriskempson/base16-vim', { 'commit': '98aa775c5fd9156ada4f912a9af41f1c020da55d' }
 Plug 'vim-airline/vim-airline-themes'
 Plug 'danro/rename.vim'
+Plug 'roxma/python-support.nvim'
+Plug 'Shougo/neco-syntax'
+Plug 'Shougo/neoinclude.vim'
 " Plug 'vim-scripts/LanguageTool'
 "Plug 'vim-latex/vim-latex'
 Plug 'roman/golden-ratio'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 call plug#end()            " required
+
 filetype on
 filetype plugin on
 filetype indent on
@@ -487,40 +495,63 @@ set completeopt=longest,menuone
 " Limit popup menu height
 set pumheight=40"
 
+" for python completions
+let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'jedi')
+" language specific completions on markdown file
+let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'mistune')
+
+" utils, optional
+let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'psutil')
+let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'setproctitle')
+
 " ====================================
 " DeoPlete Settings
 " ====================================
 " Use deoplete.
-let g:deoplete#enable_at_startup = 1
-" Unsure what these do but things seem to work so not touching... took from here: https://github.com/zchee/deoplete-clang/issues/15
-set completeopt+=noinsert
-set completeopt-=preview
-let g:deoplete#enable_smart_case = 1
-let g:deoplete#auto_completion_start_length = 0
-let g:min_pattern_length = 0
+" let g:deoplete#enable_at_startup = 1
+" " Unsure what these do but things seem to work so not touching... took from here: https://github.com/zchee/deoplete-clang/issues/15
+" set completeopt+=noinsert
+" set completeopt-=preview
+" let g:deoplete#enable_smart_case = 1
+" let g:deoplete#auto_completion_start_length = 0
+" let g:min_pattern_length = 0
 
 " Allow navigation through auto-completions using tab.
 " deoplete tab-complete
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
-" inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-inoremap <expr><BS> deoplete#mappings#smart_close_popup()."\<C-h>"
 
-function! s:my_cr_function() abort
-    return pumvisible() ? deoplete#mappings#close_popup() : "\<CR>"
-endfunction
+" ====================================
+" UltiSnips Settings
+" ====================================
+let g:UltiSnipsExpandTrigger		= "<Plug>(ultisnips_expand)"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"                                       
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:UltiSnipsRemoveSelectModeMappings = 0
+imap <expr> <Plug>(expand_or_nl) (has_key(v:completed_item,'snippet')?"\<C-U>":"\<CR>")
+imap <expr> <CR>  (pumvisible() ?  "\<c-y>\<Plug>(cm_inject_snippet)\<Plug>(expand_or_nl)" : "\<CR>")
+" optional
+inoremap <silent> <c-u> <c-r>=cm#sources#ultisnips#trigger_or_popup("\<Plug>(ultisnips_expand)")<cr>
+
+" inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+"inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+"inoremap <expr><BS> deoplete#mappings#smart_close_popup()."\<C-h>"
+"
+"function! s:my_cr_function() abort
+"    return pumvisible() ? deoplete#mappings#close_popup() : "\<CR>"
+"endfunction
 
 " Set paths to homebrew clang library and executable for deoplete clang
-let g:deoplete#sources#clang#libclang_path = "/usr/local/Cellar/llvm/HEAD/lib/libclang.dylib"
-let g:deoplete#sources#clang#clang_header = "/usr/local/Cellar/llvm/HEAD/lib/clang"
+"let g:deoplete#sources#clang#libclang_path = "/usr/local/Cellar/llvm/HEAD/lib/libclang.dylib"
+"let g:deoplete#sources#clang#clang_header = "/usr/local/Cellar/llvm/HEAD/lib/clang"
 
 " Disable vim-clang diagnostic window
 let g:clang_diagsopt = ''
 
+
 " Ensure buffer based completion is shown alongside plugin completions such as
 " clang or jedi.
-call deoplete#custom#set('buffer', 'rank', 9999)
+" call deoplete#custom#set('buffer', 'rank', 9999)
 
 " ====================================
 " YouCompleteMe Settings (Deprecated as of DeoPlete)
