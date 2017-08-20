@@ -68,13 +68,13 @@ Plug 'chriskempson/base16-vim', { 'commit': '98aa775c5fd9156ada4f912a9af41f1c020
 Plug 'vim-airline/vim-airline-themes'
 Plug 'danro/rename.vim'
 Plug 'roxma/python-support.nvim'
-Plug 'Shougo/neco-syntax'
-Plug 'Shougo/neoinclude.vim'
+"Plug 'Shougo/neco-syntax'
+"Plug 'Shougo/neoinclude.vim'
 " Plug 'vim-scripts/LanguageTool'
 "Plug 'vim-latex/vim-latex'
 Plug 'roman/golden-ratio'
 Plug 'ludovicchabant/vim-gutentags'
-Plug 'SirVer/ultisnips'
+"Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 call plug#end()            " required
 
@@ -524,14 +524,14 @@ inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
 " ====================================
 " UltiSnips Settings
 " ====================================
-let g:UltiSnipsExpandTrigger		= "<Plug>(ultisnips_expand)"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"                                       
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-let g:UltiSnipsRemoveSelectModeMappings = 0
-imap <expr> <Plug>(expand_or_nl) (has_key(v:completed_item,'snippet')?"\<C-U>":"\<CR>")
-imap <expr> <CR>  (pumvisible() ?  "\<c-y>\<Plug>(cm_inject_snippet)\<Plug>(expand_or_nl)" : "\<CR>")
-" optional
-inoremap <silent> <c-u> <c-r>=cm#sources#ultisnips#trigger_or_popup("\<Plug>(ultisnips_expand)")<cr>
+"let g:UltiSnipsExpandTrigger		= "<Plug>(ultisnips_expand)"
+"let g:UltiSnipsJumpForwardTrigger="<c-b>"                                       
+"let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+"let g:UltiSnipsRemoveSelectModeMappings = 0
+"imap <expr> <Plug>(expand_or_nl) (has_key(v:completed_item,'snippet')?"\<C-U>":"\<CR>")
+"imap <expr> <CR>  (pumvisible() ?  "\<c-y>\<Plug>(cm_inject_snippet)\<Plug>(expand_or_nl)" : "\<CR>")
+"" optional
+"inoremap <silent> <c-u> <c-r>=cm#sources#ultisnips#trigger_or_popup("\<Plug>(ultisnips_expand)")<cr>
 
 " inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 "inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
